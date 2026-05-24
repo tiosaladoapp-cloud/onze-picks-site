@@ -33,7 +33,7 @@ const COMPARE_ROWS: { feature: string; free: string | null; elite: string | null
   { feature: 'Estadísticas completas', free: null,         elite: '✓' },
   { feature: 'Todas las ligas y copas',free: null,         elite: '✓' },
   { feature: 'Picks del día siguiente',free: null,         elite: '✓ (de noche)' },
-  { feature: 'Mundial 2026',           free: '4 picks',    elite: 'Completo' },
+  { feature: 'Mundial 2026',           free: '3 picks/día', elite: 'Todos' },
   { feature: 'H2H / patrones de equipo',free: null,        elite: '✓' },
   { feature: 'Grupos con retos semanales', free: null,     elite: '✓' },
 ];
