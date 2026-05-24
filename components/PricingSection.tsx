@@ -25,15 +25,17 @@ const PLANS = [
   },
 ];
 
-const FEATURES = [
-  'Picks ilimitados diarios',
-  'Análisis completo con IA',
-  'Value bets automáticos',
-  'Odds en tiempo real',
-  'Estadísticas H2H y por equipo',
-  'Todos los partidos del Mundial 2026',
-  'Grupos privados con retos semanales',
-  'Picks del día siguiente (de noche)',
+const COMPARE_ROWS: { feature: string; free: string | null; elite: string | null }[] = [
+  { feature: 'Picks por día',          free: '3',          elite: 'Ilimitados' },
+  { feature: 'Análisis completo IA',   free: null,         elite: '✓' },
+  { feature: 'Value bets',             free: null,         elite: '✓' },
+  { feature: 'Odds en tiempo real',    free: null,         elite: '✓' },
+  { feature: 'Estadísticas completas', free: null,         elite: '✓' },
+  { feature: 'Todas las ligas y copas',free: null,         elite: '✓' },
+  { feature: 'Picks del día siguiente',free: null,         elite: '✓ (de noche)' },
+  { feature: 'Mundial 2026',           free: '4 picks',    elite: 'Completo' },
+  { feature: 'H2H / patrones de equipo',free: null,        elite: '✓' },
+  { feature: 'Grupos con retos semanales', free: null,     elite: '✓' },
 ];
 
 export function PricingSection() {
@@ -91,22 +93,42 @@ export function PricingSection() {
           ))}
         </div>
 
-        {/* Feature list */}
+        {/* Comparison table */}
         <div
-          className="rounded-2xl p-6 mb-8"
-          style={{ backgroundColor: '#141414', border: '1px solid #2a2a2a' }}
+          className="rounded-2xl overflow-hidden mb-8"
+          style={{ border: '1px solid #2a2a2a' }}
         >
-          <p className="text-xs text-[#555555] font-bold uppercase tracking-widest text-center mb-5">
-            Todo incluido en Elite
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {FEATURES.map((f) => (
-              <div key={f} className="flex items-center gap-3">
-                <span className="text-sm font-black" style={{ color: '#b8920a' }}>✓</span>
-                <span className="text-sm text-[#a0a0a0]">{f}</span>
-              </div>
-            ))}
+          {/* Header */}
+          <div
+            className="grid grid-cols-[1fr_100px_100px] sm:grid-cols-[1fr_120px_120px] px-5 py-3"
+            style={{ backgroundColor: '#1a1a1a', borderBottom: '1px solid #2a2a2a' }}
+          >
+            <span className="text-xs font-bold uppercase tracking-widest" style={{ color: '#444' }}>Feature</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-center" style={{ color: '#666' }}>Humilde</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-center" style={{ color: '#b8920a' }}>Elite</span>
           </div>
+          {/* Rows */}
+          {COMPARE_ROWS.map(({ feature, free, elite }, i) => (
+            <div
+              key={feature}
+              className="grid grid-cols-[1fr_100px_100px] sm:grid-cols-[1fr_120px_120px] px-5 py-3.5 items-center"
+              style={{
+                backgroundColor: i % 2 === 0 ? '#111111' : '#0e0e0e',
+                borderBottom: i < COMPARE_ROWS.length - 1 ? '1px solid #1e1e1e' : 'none',
+              }}
+            >
+              <span className="text-sm text-[#a0a0a0]">{feature}</span>
+              <span className="text-sm text-center font-semibold" style={{ color: free ? '#a0a0a0' : '#ef4444' }}>
+                {free ?? '✕'}
+              </span>
+              <span
+                className="text-sm text-center font-semibold"
+                style={{ color: elite === '✓' ? '#b8920a' : elite ? '#b8920a' : '#ef4444' }}
+              >
+                {elite ?? '✕'}
+              </span>
+            </div>
+          ))}
         </div>
 
         {/* Free tier note */}

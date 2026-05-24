@@ -28,9 +28,9 @@ export default async function Home() {
       <div data-animate><FeaturesSection /></div>
       <div data-animate><MundialSection /></div>
       <div data-animate><GroupsSection /></div>
-      <div data-animate><FAQSection /></div>
       <div data-animate><PricingSection /></div>
       <div data-animate><DownloadSection /></div>
+      <div data-animate><FAQSection /></div>
       <Footer />
     </main>
   );
