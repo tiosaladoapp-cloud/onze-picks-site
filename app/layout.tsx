@@ -5,6 +5,8 @@ import './globals.css';
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist' });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://onzepicks-web.vercel.app';
+
 export const metadata: Metadata = {
   title: 'Onze Picks — Picks de fútbol con análisis IA',
   description: 'Picks de fútbol seleccionados con inteligencia artificial. Análisis, estadísticas H2H y seguimiento de resultados en tiempo real. Descargá la app gratis.',
@@ -12,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Onze Picks — Picks de fútbol con análisis IA',
     description: 'Picks de fútbol seleccionados con inteligencia artificial.',
-    url: 'https://onzepicks.app',
+    url: SITE_URL,
     siteName: 'Onze Picks',
     locale: 'es_ES',
     type: 'website',
@@ -23,7 +25,7 @@ export const metadata: Metadata = {
     description: 'Picks de fútbol seleccionados con inteligencia artificial.',
   },
   robots: { index: true, follow: true },
-  alternates: { canonical: 'https://onzepicks.app' },
+  alternates: { canonical: SITE_URL },
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION,
   },
@@ -36,7 +38,7 @@ const jsonLd = {
   applicationCategory: 'SportsApplication',
   operatingSystem: 'iOS, Android',
   description: 'Picks de fútbol seleccionados con inteligencia artificial. Análisis, estadísticas H2H y seguimiento de resultados en tiempo real.',
-  url: 'https://onzepicks.app',
+  url: SITE_URL,
   offers: [
     { '@type': 'Offer', price: '2.49', priceCurrency: 'USD', name: 'Elite Semanal' },
     { '@type': 'Offer', price: '6.99', priceCurrency: 'USD', name: 'Elite Mensual' },
