@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { supabase, type FeaturedPick } from '@/lib/supabase';
 
 function localDayBounds(): { from: string; to: string } {
@@ -82,84 +82,81 @@ function Skeleton() {
   );
 }
 
+const SC: React.CSSProperties = { boxSizing: 'border-box', margin: 0, padding: 0 };
+
 // Card rendered off-screen for html2canvas capture. Uses inline styles only.
 function ShareCard({ pick }: { pick: FeaturedPick }) {
   const conf = CONFIDENCE_MAP[pick.confidence] ?? CONFIDENCE_MAP.medium;
   return (
-    <div style={{
-      width: 400,
-      backgroundColor: '#141414',
-      border: '1px solid rgba(148,116,3,0.35)',
-      borderRadius: 16,
-      overflow: 'hidden',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-    }}>
-      {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '12px 20px', borderBottom: '1px solid #2a2a2a' }}>
+    <div style={{ ...SC, width: 400, backgroundColor: '#141414', border: '1px solid rgba(148,116,3,0.35)', borderRadius: 16, overflow: 'hidden', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}>
+
+      {/* League header */}
+      <div style={{ ...SC, display: 'flex', alignItems: 'center', gap: 8, padding: '12px 20px', borderBottom: '1px solid #2a2a2a' }}>
         {pick.league_logo && (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={pick.league_logo} width={16} height={16} style={{ objectFit: 'contain' }} crossOrigin="anonymous" alt="" />
+          <img src={pick.league_logo} width={16} height={16} style={{ objectFit: 'contain', display: 'block' }} crossOrigin="anonymous" alt="" />
         )}
-        <span style={{ fontSize: 12, color: '#a0a0a0', fontWeight: 600, flex: 1 }}>{pick.league_name}</span>
-        <span style={{
-          fontSize: 11, fontWeight: 700, padding: '2px 10px', borderRadius: 999,
-          color: conf.color, border: `1px solid ${conf.color}50`, backgroundColor: `${conf.color}20`,
-        }}>{conf.label}</span>
+        <div style={{ ...SC, fontSize: 12, color: '#a0a0a0', fontWeight: 600, flex: 1, lineHeight: '1.2' }}>{pick.league_name}</div>
+        <div style={{ ...SC, fontSize: 11, fontWeight: 700, padding: '2px 10px', borderRadius: 999, lineHeight: '1.6', color: conf.color, border: `1px solid ${conf.color}50`, backgroundColor: `${conf.color}20` }}>{conf.label}</div>
       </div>
 
       {/* Match */}
-      <div style={{ padding: '20px 20px 0' }}>
-        <p style={{ fontSize: 11, color: '#555555', marginBottom: 18, margin: '0 0 18px' }}>
-          {formatMatchDate(pick.match_date)}
-        </p>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
+      <div style={{ ...SC, padding: '20px 20px 0' }}>
+        <div style={{ ...SC, fontSize: 11, color: '#555555', lineHeight: '1.2', marginBottom: 18 }}>{formatMatchDate(pick.match_date)}</div>
+
+        {/* Teams row */}
+        <div style={{ ...SC, display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+
           {/* Home */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, flex: 1 }}>
-            <div style={{ width: 56, height: 56, borderRadius: '50%', backgroundColor: '#1c1c1c', border: '1px solid #2a2a2a', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+          <div style={{ ...SC, display: 'flex', flexDirection: 'column', alignItems: 'center', width: 120 }}>
+            <div style={{ ...SC, width: 56, height: 56, borderRadius: '50%', backgroundColor: '#1c1c1c', border: '1px solid #2a2a2a', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', marginBottom: 8 }}>
               {pick.home_logo
                 // eslint-disable-next-line @next/next/no-img-element
-                ? <img src={pick.home_logo} width={36} height={36} style={{ objectFit: 'contain' }} crossOrigin="anonymous" alt="" />
-                : <span style={{ fontSize: 20, fontWeight: 900, color: '#555555' }}>{pick.home_team[0]}</span>}
+                ? <img src={pick.home_logo} width={36} height={36} style={{ objectFit: 'contain', display: 'block' }} crossOrigin="anonymous" alt="" />
+                : <div style={{ ...SC, fontSize: 20, fontWeight: 900, color: '#555555', lineHeight: 1 }}>{pick.home_team[0]}</div>}
             </div>
-            <span style={{ fontSize: 11, color: '#a0a0a0', fontWeight: 600, textAlign: 'center', maxWidth: 90 }}>{pick.home_team}</span>
+            <div style={{ ...SC, fontSize: 11, color: '#a0a0a0', fontWeight: 600, textAlign: 'center', lineHeight: '1.4', width: '100%' }}>{pick.home_team}</div>
           </div>
-          <span style={{ color: '#555555', fontWeight: 700, fontSize: 14 }}>VS</span>
+
+          {/* VS */}
+          <div style={{ ...SC, fontSize: 13, color: '#555555', fontWeight: 700, lineHeight: '56px', marginTop: 0, flexShrink: 0 }}>VS</div>
+
           {/* Away */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, flex: 1 }}>
-            <div style={{ width: 56, height: 56, borderRadius: '50%', backgroundColor: '#1c1c1c', border: '1px solid #2a2a2a', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+          <div style={{ ...SC, display: 'flex', flexDirection: 'column', alignItems: 'center', width: 120 }}>
+            <div style={{ ...SC, width: 56, height: 56, borderRadius: '50%', backgroundColor: '#1c1c1c', border: '1px solid #2a2a2a', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', marginBottom: 8 }}>
               {pick.away_logo
                 // eslint-disable-next-line @next/next/no-img-element
-                ? <img src={pick.away_logo} width={36} height={36} style={{ objectFit: 'contain' }} crossOrigin="anonymous" alt="" />
-                : <span style={{ fontSize: 20, fontWeight: 900, color: '#555555' }}>{pick.away_team[0]}</span>}
+                ? <img src={pick.away_logo} width={36} height={36} style={{ objectFit: 'contain', display: 'block' }} crossOrigin="anonymous" alt="" />
+                : <div style={{ ...SC, fontSize: 20, fontWeight: 900, color: '#555555', lineHeight: 1 }}>{pick.away_team[0]}</div>}
             </div>
-            <span style={{ fontSize: 11, color: '#a0a0a0', fontWeight: 600, textAlign: 'center', maxWidth: 90 }}>{pick.away_team}</span>
+            <div style={{ ...SC, fontSize: 11, color: '#a0a0a0', fontWeight: 600, textAlign: 'center', lineHeight: '1.4', width: '100%' }}>{pick.away_team}</div>
           </div>
         </div>
 
         {/* Prediction + odds */}
-        <div style={{ marginTop: 20, display: 'flex', gap: 12 }}>
-          <div style={{ flex: 1, borderRadius: 12, backgroundColor: '#0a0a0a', border: '1px solid #2a2a2a', padding: '12px 16px' }}>
-            <p style={{ fontSize: 11, color: '#555555', fontWeight: 600, margin: '0 0 4px' }}>Predicción</p>
-            <p style={{ fontSize: 13, color: 'white', fontWeight: 600, margin: 0 }}>{pick.prediction}</p>
+        <div style={{ ...SC, marginTop: 20, display: 'flex', gap: 12 }}>
+          <div style={{ ...SC, flex: 1, borderRadius: 12, backgroundColor: '#0a0a0a', border: '1px solid #2a2a2a', padding: '12px 16px' }}>
+            <div style={{ ...SC, fontSize: 11, color: '#555555', fontWeight: 600, lineHeight: '1.2', marginBottom: 6 }}>Predicción</div>
+            <div style={{ ...SC, fontSize: 13, color: 'white', fontWeight: 600, lineHeight: '1.3' }}>{pick.prediction}</div>
           </div>
-          <div style={{ borderRadius: 12, padding: '12px 16px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minWidth: 80, backgroundColor: 'rgba(148,116,3,0.12)', border: '1px solid rgba(148,116,3,0.3)' }}>
-            <p style={{ fontSize: 11, color: '#a0a0a0', fontWeight: 600, margin: '0 0 4px' }}>Cuota</p>
-            <p style={{ fontSize: 22, color: '#b8920a', fontWeight: 900, margin: 0 }}>{pick.odds?.toFixed(2)}</p>
+          <div style={{ ...SC, borderRadius: 12, padding: '12px 16px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minWidth: 80, backgroundColor: 'rgba(148,116,3,0.12)', border: '1px solid rgba(148,116,3,0.3)' }}>
+            <div style={{ ...SC, fontSize: 11, color: '#a0a0a0', fontWeight: 600, lineHeight: '1.2', marginBottom: 6 }}>Cuota</div>
+            <div style={{ ...SC, fontSize: 22, color: '#b8920a', fontWeight: 900, lineHeight: 1 }}>{pick.odds?.toFixed(2)}</div>
           </div>
         </div>
 
         {/* Analysis */}
         {pick.analysis && (
-          <div style={{ marginTop: 16, borderRadius: 12, backgroundColor: '#0a0a0a', padding: '12px 16px', borderLeft: '2px solid #947403' }}>
-            <p style={{ fontSize: 11, color: '#a0a0a0', lineHeight: 1.6, margin: 0 }}>{pick.analysis}</p>
+          <div style={{ ...SC, marginTop: 16, borderRadius: 12, backgroundColor: '#0a0a0a', padding: '12px 16px', borderLeft: '2px solid #947403' }}>
+            <div style={{ ...SC, fontSize: 11, color: '#a0a0a0', lineHeight: '1.6' }}>{pick.analysis}</div>
           </div>
         )}
       </div>
 
       {/* Footer branding */}
-      <div style={{ padding: '16px 20px 20px' }}>
-        <div style={{ borderRadius: 12, backgroundColor: 'rgba(148,116,3,0.12)', border: '1px solid rgba(148,116,3,0.3)', padding: '12px 16px', textAlign: 'center' }}>
-          <p style={{ fontSize: 13, color: '#b8920a', fontWeight: 700, margin: 0 }}>Análisis completo en Onze Picks</p>
+      <div style={{ ...SC, padding: '16px 20px 20px' }}>
+        <div style={{ ...SC, borderRadius: 12, backgroundColor: 'rgba(148,116,3,0.12)', border: '1px solid rgba(148,116,3,0.3)', padding: '14px 16px', textAlign: 'center' }}>
+          <div style={{ ...SC, fontSize: 13, color: '#b8920a', fontWeight: 700, lineHeight: '1.2' }}>Análisis completo en Onze Picks</div>
         </div>
       </div>
     </div>
