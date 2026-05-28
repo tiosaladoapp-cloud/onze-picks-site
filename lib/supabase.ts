@@ -30,18 +30,19 @@ export interface TipsterStats {
 }
 
 export async function getFeaturedPick(): Promise<FeaturedPick | null> {
-  const today = new Date();
-  const start = new Date(today);
-  start.setHours(0, 0, 0, 0);
-  const end = new Date(today);
-  end.setHours(23, 59, 59, 999);
+  // Use a 48-hour window from 12h ago to avoid timezone mismatches between
+  // the UTC server and users in different timezones (e.g. UTC-3 late at night)
+  const from = new Date(Date.now() - 12 * 60 * 60 * 1000);
+  const to   = new Date(Date.now() + 36 * 60 * 60 * 1000);
 
   const { data, error } = await supabase
     .from('picks')
     .select('id, home_team, away_team, home_logo, away_logo, league_name, league_logo, prediction, odds, confidence, pick_type, match_date, analysis')
-    .gte('match_date', start.toISOString())
-    .lte('match_date', end.toISOString())
+    .gte('match_date', from.toISOString())
+    .lte('match_date', to.toISOString())
     .eq('is_premium', false)
+    .is('result', null)
+    .order('match_date', { ascending: true })
     .order('confidence', { ascending: false })
     .order('odds', { ascending: false })
     .limit(1)
