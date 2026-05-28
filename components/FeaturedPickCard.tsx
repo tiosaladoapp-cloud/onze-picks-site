@@ -1,7 +1,33 @@
-import type { FeaturedPick } from '@/lib/supabase';
+'use client';
 
-interface Props {
-  pick: FeaturedPick | null;
+import { useEffect, useState } from 'react';
+import { supabase, type FeaturedPick } from '@/lib/supabase';
+
+// Calcula los bounds del día en hora local del navegador (igual que la app)
+function localDayBounds(): { from: string; to: string } {
+  const now = new Date();
+  const y = now.getFullYear();
+  const m = now.getMonth();
+  const d = now.getDate();
+  const from = new Date(y, m, d, 0, 0, 0, 0);
+  const to   = new Date(y, m, d + 1, 0, 0, 0, 0);
+  return { from: from.toISOString(), to: to.toISOString() };
+}
+
+async function fetchFeaturedPick(): Promise<FeaturedPick | null> {
+  const { from, to } = localDayBounds();
+  const { data, error } = await supabase
+    .from('picks')
+    .select('id, home_team, away_team, home_logo, away_logo, league_name, league_logo, prediction, odds, confidence, pick_type, match_date, analysis')
+    .gte('match_date', from)
+    .lt('match_date', to)
+    .eq('is_premium', false)
+    .order('confidence', { ascending: false })
+    .order('odds', { ascending: false })
+    .limit(1)
+    .single();
+  if (error || !data) return null;
+  return data as FeaturedPick;
 }
 
 const CONFIDENCE_MAP: Record<string, { label: string; color: string }> = {
@@ -30,17 +56,52 @@ function TeamAvatar({ name, logo }: { name: string; logo: string | null }) {
   );
 }
 
-export function FeaturedPickCard({ pick }: Props) {
+function Skeleton() {
+  return (
+    <div className="rounded-2xl border border-[#2a2a2a] bg-[#141414] p-5 animate-pulse">
+      <div className="flex items-center gap-2 pb-4 border-b border-[#2a2a2a] mb-4">
+        <div className="w-4 h-4 rounded bg-[#2a2a2a]" />
+        <div className="h-3 w-32 rounded bg-[#2a2a2a]" />
+      </div>
+      <div className="h-3 w-40 rounded bg-[#2a2a2a] mb-5" />
+      <div className="flex justify-between gap-4 mb-5">
+        <div className="flex flex-col items-center gap-2 flex-1">
+          <div className="w-14 h-14 rounded-full bg-[#2a2a2a]" />
+          <div className="h-3 w-16 rounded bg-[#2a2a2a]" />
+        </div>
+        <div className="w-8 h-4 rounded bg-[#2a2a2a] self-center" />
+        <div className="flex flex-col items-center gap-2 flex-1">
+          <div className="w-14 h-14 rounded-full bg-[#2a2a2a]" />
+          <div className="h-3 w-16 rounded bg-[#2a2a2a]" />
+        </div>
+      </div>
+      <div className="flex gap-3">
+        <div className="flex-1 h-16 rounded-xl bg-[#2a2a2a]" />
+        <div className="w-20 h-16 rounded-xl bg-[#2a2a2a]" />
+      </div>
+    </div>
+  );
+}
+
+export function FeaturedPickCard() {
+  const [pick, setPick] = useState<FeaturedPick | null | undefined>(undefined);
+
+  useEffect(() => {
+    fetchFeaturedPick().then(setPick).catch(() => setPick(null));
+  }, []);
+
   return (
     <section id="pick-del-dia" className="py-14 px-4">
       <div className="max-w-2xl mx-auto">
         <div className="flex items-center gap-2 mb-5">
           <div className="w-1 h-5 rounded-full bg-[#947403]" />
           <h2 className="text-xl font-black text-white">Pick del día</h2>
-          <span className="ml-auto text-xs text-[#555555] font-medium">Actualizado cada hora</span>
+          <span className="ml-auto text-xs text-[#555555] font-medium">Según tu horario local</span>
         </div>
 
-        {!pick ? (
+        {pick === undefined ? (
+          <Skeleton />
+        ) : !pick ? (
           <div className="rounded-2xl border border-[#2a2a2a] bg-[#141414] p-8 text-center">
             <p className="text-[#555555] text-sm">Sin pick disponible hoy. Volvé más tarde.</p>
           </div>

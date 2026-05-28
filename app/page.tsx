@@ -1,4 +1,4 @@
-import { getFeaturedPick, getTipsterStats } from '@/lib/supabase';
+import { getTipsterStats } from '@/lib/supabase';
 import { HeroSection } from '@/components/HeroSection';
 import { StatsBar } from '@/components/StatsBar';
 import { FeaturedPickCard } from '@/components/FeaturedPickCard';
@@ -11,20 +11,15 @@ import { DownloadSection } from '@/components/DownloadSection';
 import { Footer } from '@/components/Footer';
 import { ScrollAnimator } from '@/components/ScrollAnimator';
 
-export const revalidate = 3600;
-
 export default async function Home() {
-  const [pick, stats] = await Promise.all([
-    getFeaturedPick().catch(() => null),
-    getTipsterStats().catch(() => ({ total: 0, wins: 0, losses: 0, winRate: 0, roi: 0 })),
-  ]);
+  const stats = await getTipsterStats().catch(() => ({ total: 0, wins: 0, losses: 0, winRate: 0, roi: 0 }));
 
   return (
     <main className="flex flex-col min-h-screen">
       <ScrollAnimator />
       <HeroSection />
       <StatsBar stats={stats} />
-      <div data-animate><FeaturedPickCard pick={pick} /></div>
+      <div data-animate><FeaturedPickCard /></div>
       <div data-animate><FeaturesSection /></div>
       <div data-animate><MundialSection /></div>
       <div data-animate><GroupsSection /></div>
