@@ -21,7 +21,7 @@ export function HeroSection() {
         </span>
 
         <h1 className="text-4xl sm:text-6xl font-black tracking-tight leading-tight text-white">
-          Apostá con cabeza,{' '}
+          Apuesta con cabeza,{' '}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#947403] to-[#b8920a]">
             las estadísticas
           </span>

@@ -5,7 +5,7 @@ import { useState } from 'react';
 const FAQS = [
   {
     q: '¿Es gratis Onze Picks?',
-    a: 'Sí. La app es gratis y tiene picks diarios sin costo. El plan Elite desbloquea análisis completo, value bets y picks premium. Podés probarlo 3 días gratis al registrarte.',
+    a: 'Sí. La app es gratis y tiene picks diarios sin costo. El plan Elite desbloquea análisis completo, value bets y picks premium. Puedes probarlo 3 días gratis al registrarte.',
   },
   {
     q: '¿Cuántos picks hay por día?',
@@ -13,7 +13,7 @@ const FAQS = [
   },
   {
     q: '¿Cómo funcionan los grupos?',
-    a: 'Creás un grupo privado, compartís el código con tus amigos y cada semana compiten guardando picks. El último en el ranking semanal debe cumplir el reto que eligió el grupo por votación.',
+    a: 'Crea un grupo privado, comparte el código con tus amigos y cada semana compiten guardando picks. El último en el ranking semanal debe cumplir el reto que eligió el grupo por votación.',
   },
   {
     q: '¿Los picks garantizan ganancias?',
@@ -21,11 +21,11 @@ const FAQS = [
   },
   {
     q: '¿Cuándo llega a Android?',
-    a: 'La versión iOS ya está disponible. Android está en desarrollo y llegará próximamente. Podés dejar tu email para que te avisemos cuando esté lista.',
+    a: 'La versión iOS ya está disponible. Android está en desarrollo y llegará próximamente. Puedes dejar tu email para que te avisemos cuando esté lista.',
   },
   {
     q: '¿Puedo cancelar Elite cuando quiera?',
-    a: 'Sí, cancelás desde la App Store en cualquier momento sin penalización. Si cancelás durante los 3 días gratis, no se te cobra nada.',
+    a: 'Sí, cancela desde la App Store en cualquier momento sin penalización. Si cancelas durante los 3 días gratis, no se te cobra nada.',
   },
 ];
 
@@ -37,7 +37,7 @@ export function FAQSection() {
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-black text-white mb-3">Preguntas frecuentes</h2>
-          <p className="text-[#a0a0a0] text-sm">Todo lo que necesitás saber antes de descargar.</p>
+          <p className="text-[#a0a0a0] text-sm">Todo lo que necesitas saber antes de descargar.</p>
         </div>
 
         <div className="flex flex-col gap-2">

@@ -2,9 +2,9 @@ import Image from 'next/image';
 
 const FEATURES = [
   { icon: '⚽', title: '64 partidos cubiertos', desc: 'Pick del día para cada partido del Mundial, desde la fase de grupos hasta la final.' },
-  { icon: '🗺️', title: 'Simulador de grupos', desc: 'Predecí los clasificados de los 12 grupos A–L y armá tu propio bracket.' },
-  { icon: '🏆', title: 'Pick del campeón', desc: 'Elegí tu selección favorita y seguí su camino hasta la final.' },
-  { icon: '👥', title: 'Grupos temáticos', desc: 'Competí con amigos con picks exclusivos del Mundial. El último cumple el reto.' },
+  { icon: '🗺️', title: 'Simulador de grupos', desc: 'Predice los clasificados de los 12 grupos A–L y arma tu propio bracket.' },
+  { icon: '🏆', title: 'Pick del campeón', desc: 'Elige tu selección favorita y sigue su camino hasta la final.' },
+  { icon: '👥', title: 'Grupos temáticos', desc: 'Compite con amigos con picks exclusivos del Mundial. El último cumple el reto.' },
 ];
 
 const GROUPS = ['A','B','C','D','E','F','G','H','I','J','K','L'];

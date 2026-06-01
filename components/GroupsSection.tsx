@@ -1,17 +1,17 @@
 const steps = [
   {
     num: '1',
-    title: 'Creá o unite a un grupo',
-    desc: 'Invitá amigos con un código único. Sin límite de participantes.',
+    title: 'Crea o únete a un grupo',
+    desc: 'Invita amigos con un código único. Sin límite de participantes.',
   },
   {
     num: '2',
-    title: 'Guardá picks antes del partido',
+    title: 'Guarda picks antes del partido',
     desc: 'El sistema cierra los picks al inicio del partido. Nadie puede hacer trampa.',
   },
   {
     num: '3',
-    title: 'Votá el reto del perdedor',
+    title: 'Vota el reto del perdedor',
     desc: 'Cada lunes, el grupo vota cuál debería cumplir el último. El domingo se revela quién perdió.',
   },
 ];
@@ -26,7 +26,7 @@ const SAMPLE_CHALLENGES = [
 const RANKING = [
   { pos: 1, name: 'Carlos',  rate: '75%', icon: '🥇', color: '#b8920a', loser: false },
   { pos: 2, name: 'Martín',  rate: '67%', icon: '🥈', color: '#a0a0a0', loser: false },
-  { pos: 3, name: 'Vos',     rate: '64%', icon: '🥉', color: '#b8920a', isYou: true, loser: false },
+  { pos: 3, name: 'Tú',     rate: '64%', icon: '🥉', color: '#b8920a', isYou: true, loser: false },
   { pos: 4, name: 'Diego',   rate: '60%', icon: '4',   color: '#555555', loser: false },
   { pos: 5, name: 'Santi',   rate: '55%', icon: '5',   color: '#555555', loser: false },
   { pos: 6, name: 'Fer',     rate: '50%', icon: '6',   color: '#555555', loser: false },
@@ -48,7 +48,7 @@ export function GroupsSection() {
             </div>
 
             <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight">
-              Competí con amigos.{' '}
+              Compite con amigos.{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#947403] to-[#b8920a]">
                 El último paga el reto.
               </span>
@@ -84,7 +84,7 @@ export function GroupsSection() {
                   <p className="text-xs text-[#a0a0a0]">{c}</p>
                 </div>
               ))}
-              <p className="text-xs text-[#555555] mt-1">+ podés proponer tu propio reto personalizado</p>
+              <p className="text-xs text-[#555555] mt-1">+ puedes proponer tu propio reto personalizado</p>
             </div>
 
             <a href="#descargar" className="btn-gold inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm w-fit">

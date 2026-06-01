@@ -21,7 +21,7 @@ const PLANS = [
     period: '/año',
     daily: '≈ $0.14/día',
     highlight: true,
-    badge: 'Ahorrás 40%',
+    badge: 'Ahorra 40%',
   },
 ];
 
@@ -50,13 +50,13 @@ export function PricingSection() {
             💎 SALADO ELITE
           </div>
           <h2 className="text-3xl sm:text-4xl font-black text-white mb-3">
-            Elegí tu plan.{' '}
+            Elige tu plan.{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#947403] to-[#b8920a]">
-              Cancelás cuando quieras.
+              Cancela cuando quieras.
             </span>
           </h2>
           <p className="text-[#a0a0a0] text-sm max-w-md mx-auto">
-            3 días de prueba gratis al registrarte. Sin sorpresas: cancelás desde la App Store antes de que termine y no se te cobra nada.
+            3 días de prueba gratis al registrarte. Sin sorpresas: cancela desde la App Store antes de que termine y no se te cobra nada.
           </p>
         </div>
 
@@ -134,7 +134,7 @@ export function PricingSection() {
         {/* Free tier note */}
         <div className="text-center">
           <p className="text-xs text-[#555555] mb-4">
-            También podés usar la app <span className="text-[#a0a0a0] font-semibold">gratis</span> con 3 picks diarios — sin tarjeta, sin límite de tiempo.
+            También puedes usar la app <span className="text-[#a0a0a0] font-semibold">gratis</span> con 3 picks diarios — sin tarjeta, sin límite de tiempo.
           </p>
           <a
             href="#descargar"

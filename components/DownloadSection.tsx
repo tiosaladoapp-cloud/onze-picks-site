@@ -11,7 +11,7 @@ export function DownloadSection() {
         </div>
 
         <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight">
-          Probá Elite gratis{' '}
+          Prueba Elite gratis{' '}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#947403] to-[#b8920a]">
             3 días
           </span>
@@ -19,8 +19,8 @@ export function DownloadSection() {
         </h2>
 
         <p className="text-[#a0a0a0] max-w-md text-sm leading-relaxed">
-          Oferta exclusiva para usuarios nuevos: activá Elite completo gratis los primeros 3 días.
-          Cancelá cuando quieras — sin preguntas.
+          Oferta exclusiva para usuarios nuevos: activa Elite completo gratis los primeros 3 días.
+          Cancela cuando quieras — sin preguntas.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
