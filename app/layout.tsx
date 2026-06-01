@@ -18,11 +18,20 @@ export const metadata: Metadata = {
     siteName: 'Onze Picks',
     locale: 'es_ES',
     type: 'website',
+    images: [
+      {
+        url: `${SITE_URL}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: 'Onze Picks — Picks de fútbol con análisis IA',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Onze Picks — Picks de fútbol con análisis IA',
     description: 'Picks de fútbol seleccionados con inteligencia artificial.',
+    images: [`${SITE_URL}/og-image.png`],
   },
   robots: { index: true, follow: true },
   alternates: { canonical: SITE_URL },
