@@ -14,6 +14,7 @@ export function Footer() {
         </div>
         <div className="flex gap-4">
           <a href="/privacidad" className="hover:text-[#a0a0a0] transition-colors">Privacidad</a>
+          <a href="/soporte" className="hover:text-[#a0a0a0] transition-colors">Soporte</a>
           <a href="/terminos" className="hover:text-[#a0a0a0] transition-colors">Términos</a>
           <a href="mailto:tiosalado.app@gmail.com" className="hover:text-[#a0a0a0] transition-colors">Contacto</a>
         </div>
