@@ -1,3 +1,5 @@
+import { WaitlistForm } from './WaitlistForm';
+
 export function DownloadSection() {
   return (
     <section id="descargar" className="py-20 px-4 relative overflow-hidden">
@@ -54,6 +56,14 @@ export function DownloadSection() {
         </div>
 
         <p className="text-xs text-[#555555]">Compatible con iPhone (iOS 16+) · Android próximamente</p>
+
+        {/* Waitlist */}
+        <div className="mt-4 flex flex-col items-center gap-3 w-full">
+          <p className="text-[#a0a0a0] text-sm">
+            Avisame cuando esté disponible
+          </p>
+          <WaitlistForm />
+        </div>
       </div>
     </section>
   );
